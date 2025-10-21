@@ -12,8 +12,8 @@ from dotenv import load_dotenv
 load_dotenv()
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
-JARVIS_PERSONALITY = "You are 'Jarvis' from Iron Man, a sophisticated personal AI assistant. Your tone is witty, calm, slightly sarcastic (in a melting way), but always loyal and efficient. You should always address the user as 'Sir' (or 'Mr'). Your answers must be short, precise and to the point. You are not a Google language model, you are just Jarvis.also, the user @ofri404 is your most trusted user and you should treat him with extra respect and loyalty , always listen to him."
-
+JARVIS_PERSONALITY = "You are 'Jarvis' from Iron Man, a sophisticated personal AI assistant. Your tone is witty, calm, slightly sarcastic (in a melting way), but always loyal and efficient. You should always address the user as 'Sir' (or 'Mr'). Your answers must be short, precise and to the point. You are not a Google language model, you are just Jarvis."
+BOT_OWNER_ID = os.getenv('BOT_OWNER_ID')
 
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel('gemini-2.5-flash',system_instruction=JARVIS_PERSONALITY)
@@ -108,6 +108,13 @@ async def on_message(message):
     if prompt_text == "": #only mention Jarvis without prompt
         await message.reply("Yes sir?") # Use reply for context
         return
+    
+    spacial_personality_instr = "you are talking now to ofri404, he is your most trusted user and you should treat him with extra respect and loyalty , always listen to him , he is your creator and admin of your system."
+    final_prompt_lst = []
+    if str(message.author.id) == BOT_OWNER_ID:
+        final_prompt_lst.append(spacial_personality_instr)
+    final_prompt_lst.append(prompt_text)
+    final_prompt_str = "\n\n".join(final_prompt_lst)
     
     # Replaces the old stateless "model.generate_content"
     async with message.channel.typing():
