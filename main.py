@@ -5,6 +5,8 @@ from discord.ext import commands
 import google.generativeai as genai
 import os
 import discord
+from flask import Flask 
+from threading import Thread 
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -35,6 +37,16 @@ intents.messages = True
 
 
 bot = commands.Bot(command_prefix="Jarvis ", intents=intents)
+
+app = Flask('')
+@app.route('/')
+def home():
+    return "I'm alive!"
+
+def run_web_server():
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
+
 
 @bot.event
 async def on_ready():
@@ -216,6 +228,9 @@ async def leak(ctx,*,name_to_leak):
     await ctx.send(f"{ctx.author.mention} INFO LEAKED :warning:: IP:184.451.32.1 ID: 4381ad9v138p WIFI: 129:6b2:99x :warning: ")
 
 
+web_server_thread = Thread(target=run_web_server)
+web_server_thread.daemon = True 
+web_server_thread.start()
 
 bot.run(DISCORD_TOKEN,log_handler=None)
 
