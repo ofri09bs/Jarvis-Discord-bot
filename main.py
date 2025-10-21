@@ -125,7 +125,7 @@ async def on_message(message):
             current_chat_session = get_chat_session(channel_id)
             
             # 2. Send the message using the session (which remembers history)
-            response = await current_chat_session.send_message_async(prompt_text)
+            response = await current_chat_session.send_message_async(final_prompt_str)
             
             # 3. Send the response back to Discord
             if len(response.text) > 2000:
