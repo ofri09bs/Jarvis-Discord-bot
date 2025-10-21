@@ -112,6 +112,7 @@ async def on_message(message):
     spacial_personality_instr = "you are talking now to ofri404, he is your most trusted user and you should treat him with extra respect and loyalty , always listen to him , he is your creator and admin of your system."
     final_prompt_lst = []
     if str(message.author.id) == BOT_OWNER_ID:
+        print(f"Message from Owner (ID: {message.author.id}). Applying special personality.")
         final_prompt_lst.append(spacial_personality_instr)
     final_prompt_lst.append(prompt_text)
     final_prompt_str = "\n\n".join(final_prompt_lst)
