@@ -1,17 +1,25 @@
 # Jarvis - Discord Bot
 
-Welcome to Jarvis, a Discord bot powered by **Google Gemini**.
+Welcome to Jarvis, a sophisticated, personality-driven Discord bot that emulates **'Jarvis'** from Iron Man.
 
 ## 🌟 Description
 
-This project provides a Discord bot that utilizes the AI capabilities of Google Gemini to interact with users, answer questions, and perform various tasks on your Discord server.
+This bot uses Google Gemini to hold witty, in-character conversations. It's designed to be loyal to its creator, address users as 'Sir', and provide short, precise answers.
 
-## 🚀 Features (Example - Please Update)
+The bot remembers your conversation history on a **per-channel basis** and will only respond when triggered directly.
 
-* **AI-Powered Conversation:** Chat with the bot using the advanced Gemini model.
-* **Question Answering:** Get answers to questions on a wide range of topics.
-* **Custom Commands:** (Please add specific commands you have created here)
-* ... (Add more features)
+## 🚀 Features
+
+* **Advanced AI Personality:** Powered by Google Gemini (`gemini-1.5-flash`) with a detailed system instruction to act exactly like Jarvis.
+* **Channel-Specific Memory:** Jarvis remembers the context of your conversation in *each channel* separately.
+* **Multiple Triggers:** You can talk to Jarvis by:
+    1.  Mentioning him (`@Jarvis`)
+    2.  Starting your message with his name (`jarvis ...`)
+    3.  Replying to one of his messages.
+* **Creator Recognition:** The bot is hard-coded to recognize its owner via the `BOT_OWNER_ID` and respond with special loyalty and permissions.
+* **Moderation Tools:** Includes a native `timeout` command for server moderation.
+* **Fun Commands:** Includes several 'fun' commands like `activate`, `leak`, and `ban_this_guy`.
+* **Uptime Ready:** Includes a built-in Flask web server, making it easy to deploy on services like Replit that require a web server to stay alive.
 
 ## 🛠️ Installation and Setup
 
@@ -33,19 +41,59 @@ cd Jarvis-Discord-bot
 **### 3. Install Dependencies**
 Install the required libraries using the requirements.txt file:
 pip install -r requirements.txt
-(Note: Ensure your requirements.txt file contains all necessary libraries, such as discord.py and google-generativeai)
+(Note: Ensure your requirements.txt file contains all necessary libraries, such as discord.py, google-generativeai, Flask, and python-dotenv)
 
-**### 4. Configure Environment Variables**
-The bot requires two secret keys to operate. It is highly recommended to store them as environment variables and not directly in the code.
+**###4. Configure Environment Variables**
+This bot requires three secret keys. Create a .env file in the project's root directory:
+
+DISCORD_TOKEN=your_discord_bot_token_here
+GEMINI_API_KEY=your_gemini_api_key_here
+BOT_OWNER_ID=your_personal_discord_user_id_here
 
 DISCORD_TOKEN: Your Discord bot token.
 GEMINI_API_KEY: Your API key from Google AI Studio.
-It's recommended to create a .env file in the project's root directory (and add it to your .gitignore as you have already done) with the following content:
+BOT_OWNER_ID: (Crucial) Your personal Discord User ID. This is used for admin commands and special recognition.
 
-DISCORD_TOKEN=your_token_here
-GEMINI_API_KEY=your_api_key_here
-(You will need to ensure the code in main.py loads these variables, for example, using the dotenv library).
-
-**### 5. Run the Bot**
+**###5. Run the Bot**
 Start the bot using the command:
 python main.py
+
+**💬 Usage**
+**How to Talk to Jarvis (using gemini)**
+Jarvis will only respond if you trigger him in one of these three ways:
+Mention: @Jarvis Hello, how are you?
+Name Prefix: jarvis, what's the weather today? (*important*: call him jarvis with lowercase j not upper!)
+Reply: Simply reply to any of Jarvis's messages.
+
+If you just mention him (@Jarvis) with no prompt, he will respond with "Yes sir?".
+
+**Command Prefix**
+**The prefix for all commands is "Jarvis " (important: note the space at the end, and the uppercase J).**
+
+**⚙️ Available Commands**
+Here are the custom commands built into the bot:
+* Moderation
+*Jarvis timeout <@member> <time> [reason]*
+Times out a user for a specified duration.
+This requires both you and the bot to have "Moderate Members" permissions.
+Time format: 10s (10 seconds), 5m (5 minutes), 1h (1 hour), 2d (2 days).
+Example: Jarvis timeout @Noam 10m being annoying
+
+* Utility
+*Jarvis reset*
+Clears Jarvis's conversation memory for the current channel.
+This command can only be used by the bot's creator (as defined in BOT_OWNER_ID).
+
+* Fun
+*Jarvis activate <mode>*
+Activates a special "mode" and sends a GIF.
+Modes: freaky, ragebait
+Special Mode: admin (Only usable by the bot's creator).
+
+*Jarvis ban_this_guy*
+A fun command that asks who to ban and then posts a "banning" message (does not actually ban anyone).
+
+*Jarvis leak <name>*
+A fun command that pretends to leak a user's info and sends a GIF.
+
+you can play with him and add as much commands as you like! enjoy!
