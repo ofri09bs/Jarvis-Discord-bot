@@ -1,6 +1,6 @@
 # Jarvis - Discord Bot
 
-Welcome to Jarvis, a Discord bot powered by Google Gemini.
+Welcome to Jarvis, a Discord bot powered by **Google Gemini**.
 
 ## 🌟 Description
 
@@ -27,7 +27,6 @@ To run the bot locally, follow these steps:
 ### 2. Clone the Repository
 
 Clone the repository to your local machine:
-```bash
 git clone [https://github.com/ofri09bs/Jarvis-Discord-bot.git](https://github.com/ofri09bs/Jarvis-Discord-bot.git)
 cd Jarvis-Discord-bot
 
@@ -41,12 +40,12 @@ The bot requires two secret keys to operate. It is highly recommended to store t
 
 DISCORD_TOKEN: Your Discord bot token.
 GEMINI_API_KEY: Your API key from Google AI Studio.
-
 It's recommended to create a .env file in the project's root directory (and add it to your .gitignore as you have already done) with the following content:
+
 DISCORD_TOKEN=your_token_here
 GEMINI_API_KEY=your_api_key_here
 (You will need to ensure the code in main.py loads these variables, for example, using the dotenv library).
 
-**### 5. Run the Bot **
+**### 5. Run the Bot**
 Start the bot using the command:
 python main.py
