@@ -37,7 +37,7 @@ Use the User ID in that line to verify if you are talking to your creator."""
 
 
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemma-3-27b')
+model = genai.GenerativeModel('models/gemma-3-27b-it')
 
 # --- Memory Management ---
 # This dictionary will store active chat sessions, keyed by channel_id

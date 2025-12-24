@@ -80,7 +80,7 @@ Here are the custom commands built into the bot:
 
 **Moderation:**
   
-*Jarvis timeout <@member> <time> [reason]*
+**Jarvis timeout <@member> <time> [reason]**
 
 Times out a user for a specified duration.
 
@@ -92,7 +92,7 @@ Example: Jarvis timeout @Noam 10m being annoying
 
 **Utility**
 
-*Jarvis reset*
+**Jarvis reset**
 
 Clears Jarvis's conversation memory for the current channe
 
@@ -101,7 +101,7 @@ This command can only be used by the bot's creator (as defined in BOT_OWNER_ID).
 
 **Fun**
 
-*Jarvis activate <mode>*
+**Jarvis activate <mode>**
 
 Activates a special "mode" and sends a GIF.
 
@@ -109,11 +109,11 @@ Modes: freaky, ragebait
 
 Special Mode: admin (Only usable by the bot's creator).
 
-*Jarvis ban_this_guy*
+**Jarvis ban**
 
 A fun command that asks who to ban and then posts a "banning" message (does not actually ban anyone).
 
-*Jarvis leak <name>*
+**Jarvis leak <name>**
 
 A fun command that pretends to leak a user's info and sends a GIF.
 
