@@ -38,7 +38,7 @@ Use the User ID in that line to verify if you are talking to your creator."""
 
 
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemini-2.5-flash',system_instruction=JARVIS_PERSONALITY)
+model = genai.GenerativeModel('gemma-3-27b', system_instruction=JARVIS_PERSONALITY)
 
 # --- Memory Management ---
 # This dictionary will store active chat sessions, keyed by channel_id
@@ -173,7 +173,7 @@ async def get_user_response(ctx, question, timeout=30):
 
 
 @bot.command()
-async def ban_this_guy(ctx):
+async def ban(ctx):
     await ctx.send(f"{ctx.author.mention} Hello, sir. who would you like to ban?")
     user_to_ban = await get_user_response(ctx,f"{ctx.author.mention} Please mention the user to ban:")
     if user_to_ban:
@@ -250,6 +250,20 @@ async def leak(ctx,*,name_to_leak):
     await ctx.send(f"{ctx.author.mention} Leaking info about {name_to_leak}... :droplet: :eyes: ")
     await ctx.send("https://tenor.com/view/jarvis-leak-gif-1159901542694943356")
     await ctx.send(f"{ctx.author.mention} INFO LEAKED :warning:: IP:184.451.32.1 ID: 4381ad9v138p WIFI: 129:6b2:99x :warning: ")
+
+
+@bot.command()
+async def help(ctx):
+    help_text = """
+**Jarvis Bot Commands:**
+- `Jarvis ban`: Initiates a ban sequence for a specified user.
+- `Jarvis activate <mode>`: Activates a special mode. Available modes: freaky, ragebait, admin (admin mode is restricted to ofri404).
+- `Jarvis reset`: Resets the bot's memory for the current channel (restricted to ofri404).
+- `Jarvis timeout @user <duration>`: Times out a user for the specified duration (requires moderation permissions).
+- `Jarvis leak <name>`: Simulates leaking information about the specified name.
+- To chat with Jarvis AI, simply mention him or start your message with "jarvis" (LOWERCASE J), or reply to one of his messages.
+    """
+    await ctx.send(help_text)
 
 
 web_server_thread = Thread(target=run_web_server)
