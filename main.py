@@ -251,6 +251,28 @@ async def timeout(ctx, member: discord.Member, time_string: str, *, reason: str 
         except Exception as e:
             await ctx.send(f"An error occurred: {e}")
 
+@bot.command()
+async def sleep(ctx,time_string: str):
+
+    amount = int(time_string[:-1])
+    unit = time_string[-1].lower()
+
+    if unit == 's':
+            duration = datetime.timedelta(seconds=amount)
+    elif unit == 'm':
+            duration = datetime.timedelta(minutes=amount)
+    elif unit == 'h':
+            duration = datetime.timedelta(hours=amount)
+    elif unit == 'd':
+            duration = datetime.timedelta(days=amount)
+    else:
+        await ctx.send("Invalid time format. Use s, m, h, or d (e.g., 10m for 10 minutes).")
+        return
+        
+    await ctx.send(f"{ctx.author.mention} Sleeping for {time_string}... :zzz: ")
+    await asyncio.sleep(duration.total_seconds())
+    await ctx.send(f"{ctx.author.mention} I'm awake now! :alarm_clock: ")
+    
 
 @bot.command()
 async def leak(ctx,*,name_to_leak):
