@@ -1,6 +1,5 @@
 import asyncio
 import datetime
-from imaplib import Commands
 from discord.ext import commands
 import google.generativeai as genai
 import os
@@ -58,7 +57,7 @@ intents.message_content = True
 intents.messages = True
 
 
-bot = commands.Bot(command_prefix="Jarvis ", intents=intents)
+bot = commands.Bot(command_prefix="Jarvis ", intents=intents, help_command=None)
 
 app = Flask('')
 @app.route('/')
