@@ -253,7 +253,7 @@ async def leak(ctx,*,name_to_leak):
 
 
 @bot.command()
-async def help(ctx):
+async def helpme(ctx):
     help_text = """
     **Jarvis Bot Commands:**
     - `Jarvis ban`: Initiates a ban sequence for a specified user.
