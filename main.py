@@ -255,13 +255,13 @@ async def leak(ctx,*,name_to_leak):
 @bot.command()
 async def help(ctx):
     help_text = """
-**Jarvis Bot Commands:**
-- `Jarvis ban`: Initiates a ban sequence for a specified user.
-- `Jarvis activate <mode>`: Activates a special mode. Available modes: freaky, ragebait, admin (admin mode is restricted to ofri404).
-- `Jarvis reset`: Resets the bot's memory for the current channel (restricted to ofri404).
-- `Jarvis timeout @user <duration>`: Times out a user for the specified duration (requires moderation permissions).
-- `Jarvis leak <name>`: Simulates leaking information about the specified name.
-- To chat with Jarvis AI, simply mention him or start your message with "jarvis" (LOWERCASE J), or reply to one of his messages.
+    **Jarvis Bot Commands:**
+    - `Jarvis ban`: Initiates a ban sequence for a specified user.
+    - `Jarvis activate <mode>`: Activates a special mode. Available modes: freaky, ragebait, admin (admin mode is restricted to ofri404).
+    - `Jarvis reset`: Resets the bot's memory for the current channel (restricted to ofri404).
+    - `Jarvis timeout @user <duration>`: Times out a user for the specified duration (requires moderation permissions).
+    - `Jarvis leak <name>`: Simulates leaking information about the specified name.
+    - To chat with Jarvis AI, simply mention him or start your message with "jarvis" (LOWERCASE J), or reply to one of his messages.
     """
     await ctx.send(help_text)
 
