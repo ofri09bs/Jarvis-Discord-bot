@@ -37,16 +37,25 @@ Use the User ID in that line to verify if you are talking to your creator."""
 
 
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemma-3-27b', system_instruction=JARVIS_PERSONALITY)
+model = genai.GenerativeModel('gemma-3-27b')
 
 # --- Memory Management ---
 # This dictionary will store active chat sessions, keyed by channel_id
 chat_sessions = {}
 
 def get_chat_session(channel_id):
+    """
+    Manages chat sessions by injecting Jarvis personality into the history 
+    specifically for Gemma models that lack a system_instruction parameter.
+    """
     if channel_id not in chat_sessions:
-        # If no chat exists for this channel, create a new one
-        chat_sessions[channel_id] = model.start_chat(history=[])
+        # We start the chat with the personality instructions as the first 'user' message
+        # and a fake 'model' response to lock in the persona.
+        initial_history = [
+            {"role": "user", "parts": [JARVIS_PERSONALITY]},
+            {"role": "model", "parts": ["Understood, Sir. Systems online. How may I assist you today?"]}
+        ]
+        chat_sessions[channel_id] = model.start_chat(history=initial_history)
     
     return chat_sessions[channel_id]
 # --- End Memory Management ---
@@ -255,12 +264,13 @@ async def leak(ctx,*,name_to_leak):
 async def helpme(ctx):
     help_text = """
     **Jarvis Bot Commands:**
+
     - `Jarvis ban`: Initiates a ban sequence for a specified user.
     - `Jarvis activate <mode>`: Activates a special mode. Available modes: freaky, ragebait, admin (admin mode is restricted to ofri404).
     - `Jarvis reset`: Resets the bot's memory for the current channel (restricted to ofri404).
     - `Jarvis timeout @user <duration>`: Times out a user for the specified duration (requires moderation permissions).
     - `Jarvis leak <name>`: Simulates leaking information about the specified name.
-    - To chat with Jarvis AI, simply mention him or start your message with "jarvis" (LOWERCASE J), or reply to one of his messages.
+    - To chat with Jarvis AI, simply mention him or start your message with "jarvis" ( **LOWERCASE** J), or reply to one of his messages.
     """
     await ctx.send(help_text)
 
