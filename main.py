@@ -90,7 +90,7 @@ async def on_message(message):
     if message.author == bot.user:
         return # Ignore messages from the bot itself
     
-    if is_asleep and message.author.id != BOT_OWNER_ID:
+    if is_asleep and message.author.name != "ofri404":
         return # Ignore messages from others if the bot is asleep
     
     # --- Command Processing ---
@@ -256,7 +256,8 @@ async def timeout(ctx, member: discord.Member, time_string: str, *, reason: str 
 
 @bot.command()
 async def sleep(ctx):
-    if ctx.author.id != BOT_OWNER_ID:
+    global is_asleep
+    if ctx.author.name != "ofri404":
         await ctx.send("Only ofri404 can put me to sleep, Sir.")
         return
     await ctx.send("Going to sleep now, Sir. Wake me up when you need me. :sleeping:")
@@ -264,7 +265,8 @@ async def sleep(ctx):
 
 @bot.command()
 async def wakeup(ctx):
-    if ctx.author.id != BOT_OWNER_ID:
+    global is_asleep
+    if ctx.author.name != "ofri404":
         await ctx.send("Only ofri404 can wake me up, Sir.")
         return
     await ctx.send("Waking up now, Sir. I'm ready to assist you. :sunny:")
