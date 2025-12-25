@@ -65,7 +65,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.messages = True
 
-
+is_asleep = False
 bot = commands.Bot(command_prefix="Jarvis ", intents=intents, help_command=None)
 
 app = Flask('')
@@ -89,6 +89,9 @@ async def on_ready():
 async def on_message(message):
     if message.author == bot.user:
         return # Ignore messages from the bot itself
+    
+    if is_asleep and message.author.id != BOT_OWNER_ID:
+        return # Ignore messages from others if the bot is asleep
     
     # --- Command Processing ---
     # Process commands (like "Jarvis ban_this_guy") FIRST.
@@ -252,26 +255,21 @@ async def timeout(ctx, member: discord.Member, time_string: str, *, reason: str 
             await ctx.send(f"An error occurred: {e}")
 
 @bot.command()
-async def sleep(ctx,time_string: str):
-
-    amount = int(time_string[:-1])
-    unit = time_string[-1].lower()
-
-    if unit == 's':
-            duration = datetime.timedelta(seconds=amount)
-    elif unit == 'm':
-            duration = datetime.timedelta(minutes=amount)
-    elif unit == 'h':
-            duration = datetime.timedelta(hours=amount)
-    elif unit == 'd':
-            duration = datetime.timedelta(days=amount)
-    else:
-        await ctx.send("Invalid time format. Use s, m, h, or d (e.g., 10m for 10 minutes).")
+async def sleep(ctx):
+    if ctx.author.id != BOT_OWNER_ID:
+        await ctx.send("Only ofri404 can put me to sleep, Sir.")
         return
-        
-    await ctx.send(f"{ctx.author.mention} Sleeping for {time_string}... :zzz: ")
-    await asyncio.sleep(duration.total_seconds())
-    await ctx.send(f"{ctx.author.mention} I'm awake now! :alarm_clock: ")
+    await ctx.send("Going to sleep now, Sir. Wake me up when you need me. :sleeping:")
+    is_asleep = True
+
+@bot.command()
+async def wakeup(ctx):
+    if ctx.author.id != BOT_OWNER_ID:
+        await ctx.send("Only ofri404 can wake me up, Sir.")
+        return
+    await ctx.send("Waking up now, Sir. I'm ready to assist you. :sunny:")
+    is_asleep = False
+    
     
 
 @bot.command()
