@@ -44,10 +44,6 @@ model = genai.GenerativeModel('models/gemma-3-27b-it')
 chat_sessions = {}
 
 def get_chat_session(channel_id):
-    """
-    Manages chat sessions by injecting Jarvis personality into the history 
-    specifically for Gemma models that lack a system_instruction parameter.
-    """
     if channel_id not in chat_sessions:
         # We start the chat with the personality instructions as the first 'user' message
         # and a fake 'model' response to lock in the persona.
@@ -155,8 +151,15 @@ async def on_message(message):
             response = await current_chat_session.send_message_async(final_prompt_str)
             
             # 3. Send the response back to Discord
-            if len(response.text) > 2000:
-                await message.reply("My response is a bit long for Discord, Sir. I've truncated it.")
+            if len(response.text) > 2000: # We will write the response to a file if too long
+                try:
+                    with open("response.txt", "w", encoding="utf-8") as f:
+                        f.write(response.text)
+                    await message.reply(file=discord.File("response.txt"), content="My response is a bit long for Discord, Sir. Please see the attached file.")
+                    os.remove("response.txt") # Clean up the file after sending
+                except Exception as e:
+                    await message.reply(f"Failed to send the response file. Error: {e}")
+                    os.remove("response.txt") # Ensure cleanup even on failure
             else:
                 await message.reply(response.text) # Use reply for better conversation flow
         
