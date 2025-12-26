@@ -38,12 +38,12 @@ Clone the repository to your local machine:
 git clone [https://github.com/ofri09bs/Jarvis-Discord-bot.git](https://github.com/ofri09bs/Jarvis-Discord-bot.git)
 cd Jarvis-Discord-bot
 
-**### 3. Install Dependencies**
+### 3. Install Dependencies
 Install the required libraries using the requirements.txt file:
 pip install -r requirements.txt
 (Note: Ensure your requirements.txt file contains all necessary libraries, such as discord.py, google-generativeai, Flask, and python-dotenv)
 
-**###4. Configure Environment Variables**
+### 4. Configure Environment Variables
 This bot requires three secret keys. Create a .env file in the project's root directory:
 
 DISCORD_TOKEN: Your Discord bot token.
@@ -53,68 +53,49 @@ GEMINI_API_KEY: Your API key from Google AI Studio.
 BOT_OWNER_ID: (Crucial) Your personal Discord User ID. This is used for admin commands and special recognition.
 
 
-**###5. Run the Bot**
+### 5. Run the Bot
 Start the bot using the command:
 python main.py
 
-**💬 Usage**
+## 💬 Usage
 
 **How to Talk to Jarvis (using gemini)**
 
 Jarvis will only respond if you trigger him in one of these three ways:
 
-Mention: @Jarvis Hello, how are you?
+**Mention**: @Jarvis Hello, how are you?
 
-Name Prefix: jarvis, what's the weather today? (*important*: call him jarvis with lowercase j not upper!)
+**Name** Prefix: jarvis, what's the weather today? (**important**: call him jarvis with lowercase j not upper!)
 
-Reply: Simply reply to any of Jarvis's messages.
-
+**Reply**: Simply reply to any of Jarvis's messages.
 If you just mention him (@Jarvis) with no prompt, he will respond with "Yes sir?".
 
-**Command Prefix**
+## Command Prefix
 
 **The prefix for all commands is "Jarvis " (important: note the space at the end, and the uppercase J).**
 
-**⚙️ Available Commands**
-Here are the custom commands built into the bot:
+## ⚙️ Available Commands
 
-**Moderation:**
+Here are the custom commands built into the bot:
   
 **Jarvis timeout <@member> <time> [reason]**
-
 Times out a user for a specified duration.
-
 This requires both you and the bot to have "Moderate Members" permissions.
-
 Time format: 10s (10 seconds), 5m (5 minutes), 1h (1 hour), 2d (2 days).
-
 Example: Jarvis timeout @Noam 10m being annoying
 
-**Utility**
-
 **Jarvis reset**
-
 Clears Jarvis's conversation memory for the current channe
-
 This command can only be used by the bot's creator (as defined in BOT_OWNER_ID).
 
-
-**Fun**
-
 **Jarvis activate <mode>**
-
 Activates a special "mode" and sends a GIF.
-
 Modes: freaky, ragebait
-
 Special Mode: admin (Only usable by the bot's creator).
 
 **Jarvis ban**
-
 A fun command that asks who to ban and then posts a "banning" message (does not actually ban anyone).
 
 **Jarvis leak <name>**
-
 A fun command that pretends to leak a user's info and sends a GIF.
-
 you can play with him and add as much commands as you like! enjoy!
