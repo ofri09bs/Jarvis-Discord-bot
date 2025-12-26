@@ -300,6 +300,12 @@ async def helpme(ctx):
     await ctx.send(help_text)
 
 
+@bot.command()
+async def stroke(ctx):
+    await ctx.send(f"{ctx.author.mention} Yes sir, stroking it now... :smirk: :hand_splayed: ")
+    await ctx.send("https://tenor.com/view/jarvis-stroke-gif-8617730390587806021")
+
+
 web_server_thread = Thread(target=run_web_server)
 web_server_thread.daemon = True 
 web_server_thread.start()
